@@ -497,15 +497,29 @@ function dragRail(sel){
 }
 function showEverything(){
   document.documentElement.classList.remove('js');
-  document.querySelectorAll('.exhibit,.build-fig figcaption,.mask-fig,#board .board-row,'
-    + '.live-fig figcaption').forEach(function(e){
+  document.querySelectorAll('.title .ln>span,.exhibit,.build-fig figcaption,.mask-fig,'
+    + '#board .board-row,.live-fig figcaption').forEach(function(e){
     e.style.opacity=1; e.style.transform='none';
   });
   document.querySelectorAll('.build-wipe').forEach(function(e){ e.style.display='none'; });
   document.querySelectorAll('#board .board-row').forEach(function(e){ e.classList.add('on'); });
 }
+/* the title reveal is driven by transform, not opacity, so the generic
+   opacity-based watchdog below can never catch it if the timeline that
+   was supposed to animate it never ran (e.g. a later script error, or a
+   throw outside the try/catch below). This check is independent of both
+   and fires regardless of whatever else did or didn't succeed. */
+function guaranteeTitleVisible(){
+  setTimeout(function(){
+    document.querySelectorAll('.title .ln>span').forEach(function(el){
+      var m = getComputedStyle(el).transform;
+      if (m && m !== 'none') { el.style.transform = 'none'; el.style.opacity = 1; }
+    });
+  }, 2600);
+}
 
 (function boot(){
+  guaranteeTitleVisible();
   wireTopbar();
   dragRail('railIdentity');
   dragRail('railTouch');
@@ -623,17 +637,21 @@ function showEverything(){
 
   } catch (e) { showEverything(); }
 
-  gsap.to('#prog', {scaleX:1, ease:'none',
-    scrollTrigger:{trigger:document.body, start:'top top', end:'bottom bottom', scrub:.3}});
+  /* everything below is chrome (progress bar, section label, watchdog) — none
+     of it should be able to take the safety net down with it if it throws */
+  try {
+    gsap.to('#prog', {scaleX:1, ease:'none',
+      scrollTrigger:{trigger:document.body, start:'top top', end:'bottom bottom', scrub:.3}});
 
-  var here = document.getElementById('hereTag');
-  gsap.utils.toArray('section[data-tag]').forEach(function(sc){
-    ScrollTrigger.create({trigger:sc, start:'top 55%', end:'bottom 55%',
-      onToggle:function(s){ if (s.isActive) here.innerHTML = sc.dataset.tag; }});
-  });
-  ScrollTrigger.create({trigger:'#s-cover', start:'bottom-=90 top',
-    onEnter:function(){ document.getElementById('topbar').classList.add('stuck'); },
-    onLeaveBack:function(){ document.getElementById('topbar').classList.remove('stuck'); }});
+    var here = document.getElementById('hereTag');
+    gsap.utils.toArray('section[data-tag]').forEach(function(sc){
+      ScrollTrigger.create({trigger:sc, start:'top 55%', end:'bottom 55%',
+        onToggle:function(s){ if (s.isActive) here.innerHTML = sc.dataset.tag; }});
+    });
+    ScrollTrigger.create({trigger:'#s-cover', start:'bottom-=90 top',
+      onEnter:function(){ document.getElementById('topbar').classList.add('stuck'); },
+      onLeaveBack:function(){ document.getElementById('topbar').classList.remove('stuck'); }});
+  } catch (e) {}
 
   /* safety net — content must never depend on a timed animation running.
      Long grace period so it can't fire mid-scene and spoil a reveal. */
