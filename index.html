@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FWD — Event Direction — Sanidhi Paun</title>
+<meta name="description" content="10,000 people across 7 locations, one day celebrating innovation — an event led from the back of the room: vendors, stage, sound, light, and a design team of eight, called live." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<script>
+  document.documentElement.classList.add('js');
+  setTimeout(function(){ if(!window.__fwdBooted) document.documentElement.classList.remove('js'); }, 3000);
+</script>
+
+<style>
+/* ============================================================================
+   FWD — EVENT DIRECTION CASE STUDY
+   A production story, not a design-authorship one. The identity and film were
+   made by a creative lead and an eight-person design team; every beat below
+   says so. What this page is actually about is the room: vendors, the stage,
+   sound and light, and someone calling cues live so the room never showed the
+   seams. Scene-based, self-playing on arrival — scroll only moves you between
+   beats. Dark throughout: it's the event's own palette, not a stylistic choice.
+   ========================================================================== */
+
+:root{
+  --green:#3ECF6E; --green-2:#8FE38F; --green-deep:#0B3B22;
+  --ink:#07090A; --ink-1:#101413; --paper:#0C0F0E;
+  --fg:#EDF2EE; --fg-2:#9AA79E; --fg-3:#5C6862;
+  --line:rgba(237,242,238,.14); --line-soft:rgba(237,242,238,.07);
+  --gut:clamp(20px,4.4vw,80px);
+  --ease:cubic-bezier(.22,.68,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--fg);
+  font-family:'Archivo',system-ui,sans-serif;font-size:17px;line-height:1.6;font-weight:400;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--green);color:#04140A}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic}
+
+/* ---------- chrome --------------------------------------------------------- */
+.prog{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);
+  transform-origin:0 50%;z-index:200;background:var(--green)}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:190;padding:18px var(--gut);
+  display:flex;align-items:center;justify-content:space-between;pointer-events:none;
+  transition:transform .5s var(--ease),background .4s,backdrop-filter .4s;
+  transform:translateY(0)}
+.topbar.stuck{background:rgba(7,9,10,.72);backdrop-filter:blur(14px)}
+.topbar.hide{transform:translateY(-130%)}
+.topbar>*{pointer-events:auto}
+.back{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--fg)}
+.back .ar{display:inline-block;transition:transform .4s var(--ease)}
+.back:hover .ar{transform:translateX(-5px)}
+.here{color:var(--fg-3);display:flex;gap:12px;align-items:center}
+.here b{color:var(--fg);font-weight:500}
+@media(max-width:720px){.here{display:none}}
+
+/* ---------- scenes ---------------------------------------------------------- */
+.scene{position:relative;min-height:100svh;display:flex;align-items:center;
+  padding:clamp(80px,11vh,140px) var(--gut);overflow:hidden}
+.scene.c{justify-content:center;text-align:center}
+.wrap{width:100%;max-width:1300px;margin:0 auto;position:relative;z-index:2}
+.two-col{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(30px,5vw,76px);align-items:center}
+@media(max-width:940px){.two-col{grid-template-columns:1fr;gap:28px}}
+
+.title{font-weight:800;letter-spacing:-.03em;line-height:.94;
+  font-size:clamp(38px,7.6vw,120px);max-width:16ch}
+.title .ln{display:block;overflow:hidden}
+.title .ln>span{display:block}
+.title-sub{margin-top:clamp(18px,2.6vh,30px);font-size:clamp(15px,1.3vw,19px);
+  color:var(--fg-2);max-width:56ch;line-height:1.65}
+
+.credits{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 32px;
+  border-top:1px solid var(--line);padding-top:20px;margin-top:clamp(34px,5vh,58px)}
+@media(max-width:900px){.credits{grid-template-columns:repeat(2,1fr)}}
+.credits .k{color:var(--fg-3);margin-bottom:8px}
+.credits .v{font-size:13.5px;line-height:1.5;font-weight:500}
+
+.stmt{max-width:58ch}
+.stmt.narrow{max-width:42ch}
+.stmt.centre{margin:0 auto;text-align:center}
+.stmt .k{color:var(--fg-3);margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.stmt.centre .k{justify-content:center}
+.stmt .k i{display:block;width:36px;height:1px;background:var(--line)}
+.stmt h3{font-weight:800;letter-spacing:-.028em;line-height:1.02;
+  font-size:clamp(30px,4.4vw,64px);margin-bottom:clamp(18px,2.6vh,26px)}
+.stmt p{font-size:clamp(15px,1.25vw,18px);color:var(--fg-2);line-height:1.7}
+.stmt p+p{margin-top:15px}
+.stmt p b{color:var(--fg);font-weight:600}
+
+/* ---------- 01 cover : video field ------------------------------------------ */
+#s-cover{padding-top:clamp(120px,16vh,180px)}
+.cover-video{position:absolute;inset:0;z-index:0;overflow:hidden}
+.cover-video video{width:100%;height:100%;object-fit:cover;
+  filter:saturate(1.05) brightness(.62)}
+.cover-video::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(7,9,10,.35) 0%,rgba(7,9,10,.55) 55%,var(--ink) 96%)}
+#s-cover .wrap{z-index:2}
+.ev-tag{display:inline-flex;align-items:center;gap:10px;color:var(--green-2);
+  border:1px solid rgba(143,227,143,.3);border-radius:100px;padding:8px 16px 8px 14px;
+  margin-bottom:clamp(20px,3vh,32px)}
+.ev-tag i{width:6px;height:6px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 0 0 rgba(62,207,110,.6);animation:pulse 2.2s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(62,207,110,.55)}
+  70%{box-shadow:0 0 0 12px rgba(62,207,110,0)}100%{box-shadow:0 0 0 0 rgba(62,207,110,0)}}
+
+/* ---------- 02 the scale : stat field --------------------------------------- */
+#s-scale{flex-direction:column;justify-content:center;gap:clamp(30px,5vh,58px)}
+.scale-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,50px);
+  width:100%;max-width:1200px;margin:0 auto;border-top:1px solid var(--line);
+  padding-top:clamp(28px,4vh,44px)}
+@media(max-width:820px){.scale-grid{grid-template-columns:1fr;gap:30px}}
+.scale-grid .n{font-weight:800;letter-spacing:-.04em;line-height:.92;
+  font-size:clamp(44px,7vw,104px);color:var(--fg)}
+.scale-grid .n em{font-style:normal;color:var(--green-2)}
+.scale-grid .l{margin-top:10px;color:var(--fg-3)}
+.scale-note{max-width:64ch;font-size:clamp(15px,1.25vw,18px);color:var(--fg-2);line-height:1.7}
+.scale-note b{color:var(--fg);font-weight:600}
+
+/* ---------- 03 concept ------------------------------------------------------ */
+#s-concept{justify-content:center}
+.concept-mark{position:absolute;right:6%;top:50%;transform:translateY(-50%);
+  font-size:clamp(120px,20vw,340px);font-weight:800;letter-spacing:-.05em;
+  color:rgba(62,207,110,.06);pointer-events:none;line-height:1;z-index:0}
+.concept-quote{font-family:'Instrument Serif',Georgia,serif;font-style:italic;
+  font-size:clamp(22px,3vw,38px);line-height:1.45;max-width:26ch;color:var(--fg)}
+.concept-src{margin-top:clamp(22px,3vh,34px);color:var(--fg-3)}
+
+/* ---------- 04/05 exhibit rails ---------------------------------------------- */
+.rail-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  width:100%;max-width:1300px;margin:0 auto clamp(22px,3.4vh,40px)}
+@media(max-width:760px){.rail-head{flex-direction:column;align-items:flex-start;gap:14px}}
+.rail{width:100vw;align-self:center;overflow-x:auto;cursor:grab;
+  scrollbar-width:none;-ms-overflow-style:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.rail.dragging{cursor:grabbing}
+.rail::-webkit-scrollbar{display:none}
+.rail-track{display:flex;gap:clamp(16px,2.2vw,32px);width:max-content;padding:6px var(--gut) 10px}
+.exhibit{width:clamp(300px,42vw,620px);flex:none;opacity:0}
+.exhibit .sheet{border:1px solid var(--line);background:#000;overflow:hidden;
+  box-shadow:0 40px 90px -50px rgba(0,0,0,.75)}
+.exhibit .sheet img{width:100%;height:auto;display:block;transition:transform 1.1s var(--ease)}
+.exhibit:hover .sheet img{transform:scale(1.035)}
+.exhibit figcaption{margin-top:14px;color:var(--fg-3)}
+.exhibit figcaption b{color:var(--fg);font-weight:500}
+#s-identity{flex-direction:column;justify-content:center;gap:clamp(8px,1.4vh,16px)}
+#s-touch{flex-direction:column;justify-content:center;gap:clamp(8px,1.4vh,16px)}
+
+/* ---------- 06 the role : the board ----------------------------------------- */
+#s-role{flex-direction:column;justify-content:center;gap:clamp(28px,4.4vh,50px)}
+.role-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(30px,5vw,72px);
+  align-items:center;width:100%;max-width:1300px;margin:0 auto}
+@media(max-width:960px){.role-grid{grid-template-columns:1fr;gap:32px}}
+.board{border:1px solid var(--line);background:linear-gradient(180deg,#0D1210,#080a09);
+  padding:clamp(20px,2.6vw,34px)}
+.board-row{display:flex;align-items:center;gap:16px;padding:13px 0;
+  border-bottom:1px solid var(--line-soft)}
+.board-row:last-child{border-bottom:0}
+.board-row .go{flex:none;width:9px;height:9px;border-radius:50%;
+  background:var(--fg-3);transition:background .3s,box-shadow .3s}
+.board-row.on .go{background:var(--green);
+  box-shadow:0 0 0 4px rgba(62,207,110,.18)}
+.board-row .t{font-size:14.5px;font-weight:500;color:var(--fg-2);transition:color .3s}
+.board-row.on .t{color:var(--fg)}
+.board-row .tag{margin-left:auto;color:var(--fg-3);white-space:nowrap}
+
+/* ---------- 07 the build : plan to real -------------------------------------- */
+#s-build{flex-direction:column;justify-content:center;gap:clamp(28px,4.4vh,50px)}
+.build-pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,34px);
+  width:100%;max-width:1300px;margin:0 auto;align-items:end}
+@media(max-width:860px){.build-pair{grid-template-columns:1fr}}
+.build-fig{position:relative;overflow:hidden;border:1px solid var(--line)}
+.build-fig img{width:100%;display:block}
+.build-fig figcaption{position:absolute;left:0;bottom:0;right:0;padding:14px 18px;
+  color:#fff;background:linear-gradient(transparent,rgba(4,6,5,.82));opacity:0}
+.build-wipe{position:absolute;inset:0;background:var(--ink);transform-origin:100% 50%}
+.build-arrow{display:flex;align-items:center;justify-content:center;color:var(--fg-3);
+  font-size:22px}
+@media(max-width:860px){.build-arrow{transform:rotate(90deg);margin:-6px 0}}
+
+/* ---------- 08 the film ------------------------------------------------------ */
+#s-film{flex-direction:column;justify-content:center;gap:clamp(24px,3.6vh,44px)}
+.film-card{width:100%;max-width:1300px;margin:0 auto;position:relative;
+  overflow:hidden;border:1px solid var(--line)}
+.film-card img{width:100%;display:block;max-height:70svh;object-fit:cover}
+.film-tag{position:absolute;left:22px;bottom:20px;color:#fff}
+.film-tag b{display:block;font-family:'Instrument Serif',Georgia,serif;font-style:italic;
+  font-size:clamp(20px,2.6vw,32px);font-weight:400}
+
+/* ---------- 09 the eyemask moment ------------------------------------------- */
+#s-mask{flex-direction:column;justify-content:center;gap:clamp(26px,4vh,48px)}
+.mask-pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,34px);
+  width:100%;max-width:1300px;margin:0 auto}
+@media(max-width:860px){.mask-pair{grid-template-columns:1fr}}
+.mask-fig{position:relative;overflow:hidden;border:1px solid var(--line);background:#000}
+.mask-fig img{width:100%;height:100%;object-fit:cover;display:block;min-height:260px}
+.mask-fig figcaption{position:absolute;left:16px;bottom:14px;color:var(--fg-2)}
+.mask-fig figcaption b{color:#fff}
+.mask-fig .badge{position:absolute;top:14px;left:14px;color:#0B3B22;background:var(--green-2);
+  padding:5px 10px;border-radius:100px;font-weight:600}
+
+/* ---------- 10 live moment --------------------------------------------------- */
+#s-live{justify-content:center}
+.live-fig{position:relative;width:100%;max-width:1300px;margin:0 auto;
+  overflow:hidden;border:1px solid var(--line)}
+.live-fig img{width:100%;display:block;max-height:74svh;object-fit:cover}
+.live-fig figcaption{position:absolute;left:0;bottom:0;right:0;padding:20px 24px;color:#fff;
+  background:linear-gradient(transparent,rgba(4,6,5,.85))}
+.live-fig figcaption b{font-family:'Instrument Serif',Georgia,serif;font-style:italic;
+  font-weight:400;font-size:clamp(18px,2vw,24px);display:block;margin-bottom:4px}
+
+/* ---------- 11 close ---------------------------------------------------------- */
+#s-end{justify-content:center;text-align:center}
+.end-h{font-weight:800;letter-spacing:-.03em;line-height:1;
+  font-size:clamp(34px,5.6vw,84px);max-width:16ch;margin:0 auto}
+.end-glow{position:absolute;left:50%;top:50%;width:min(70vw,900px);height:min(70vw,900px);
+  transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(62,207,110,.18),transparent 70%);
+  pointer-events:none;z-index:0}
+.figs{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,3vw,44px);
+  max-width:920px;margin:clamp(34px,5vh,62px) auto 0;
+  border-top:1px solid var(--line);padding-top:26px}
+@media(max-width:760px){.figs{grid-template-columns:repeat(2,1fr);gap:26px}}
+.figs .n{font-weight:800;letter-spacing:-.035em;font-size:clamp(26px,3.6vw,48px);line-height:1;
+  color:var(--fg)}
+.figs .n em{font-style:normal;color:var(--green-2)}
+.figs .l{color:var(--fg-3);margin-top:9px}
+.end-back{display:inline-flex;align-items:center;gap:12px;margin-top:clamp(34px,5vh,60px);
+  border:1px solid var(--line);padding:14px 26px;border-radius:100px;font-weight:500;
+  font-size:14px;transition:background .4s var(--ease),color .4s var(--ease),
+  border-color .4s var(--ease)}
+.end-back:hover{background:var(--green);color:#04140A;border-color:var(--green)}
+.end-back .ar{transition:transform .4s var(--ease)}
+.end-back:hover .ar{transform:translateX(-5px)}
+
+/* reveal guards */
+.js .title .ln>span{transform:translateY(110%)}
+@media(prefers-reduced-motion:reduce){
+  .js .title .ln>span{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+
+<header class="topbar" id="topbar">
+  <a class="back" href="index.html#top" onclick="history.back();return false;"><span class="ar">←</span> Sanidhi Paun</a>
+  <div class="here mono"><span>FWD</span><b id="hereTag">Cover</b></div>
+</header>
+
+<!-- ── 01 · COVER ──────────────────────────────────────────────────────────── -->
+<section class="scene" id="s-cover" data-tag="Cover">
+  <div class="cover-video">
+    <video autoplay muted loop playsinline poster="assets/fwd/hero-portrait.jpg">
+      <source src="assets/fwd/video/film-01.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="wrap">
+    <div class="ev-tag mono"><i></i>Bengaluru · 19 November</div>
+    <h1 class="title">
+      <span class="ln"><span>Directing a</span></span>
+      <span class="ln"><span>day built on</span></span>
+      <span class="ln"><span>light.</span></span>
+    </h1>
+    <p class="title-sub">FWD — an innovation event for 10,000 people across 7 locations, built
+      around a single idea: light means movement. A creative lead and an eight-person design
+      team built the identity and the film. I ran the day itself.</p>
+    <div class="credits">
+      <div class="cr"><div class="k mono">My role</div>
+        <div class="v">Event lead — production, vendors, live show control</div></div>
+      <div class="cr"><div class="k mono">Identity &amp; film</div>
+        <div class="v">Creative lead + design team of 8</div></div>
+      <div class="cr"><div class="k mono">Scale</div>
+        <div class="v">10,000 people, 7 locations</div></div>
+      <div class="cr"><div class="k mono">Audience</div>
+        <div class="v">Employees, alliance partners, startups</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 02 · THE SCALE ──────────────────────────────────────────────────────── -->
+<section class="scene" id="s-scale" data-tag="The scale">
+  <p class="scale-note stmt">One day. Everyone who had a hand in the firm's innovation work that
+    year — <b>employees, alliance partners, and the startups they'd backed</b> — in one room,
+    watching it get celebrated at once.</p>
+  <div class="scale-grid">
+    <div><div class="n"><em>10,000</em></div><div class="l mono">People, across the day</div></div>
+    <div><div class="n"><em>7</em></div><div class="l mono">Locations run at once</div></div>
+    <div><div class="n"><em>1</em></div><div class="l mono">Day — no second night to fix it</div></div>
+  </div>
+</section>
+
+<!-- ── 03 · THE CONCEPT ────────────────────────────────────────────────────── -->
+<section class="scene c" id="s-concept" data-tag="The concept">
+  <div class="concept-mark" aria-hidden="true">FWD</div>
+  <div class="wrap" style="max-width:900px">
+    <div class="k mono" style="justify-content:center;display:flex;gap:14px;align-items:center;margin-bottom:22px">
+      <i style="display:block;width:36px;height:1px;background:var(--line)"></i>The concept
+      <i style="display:block;width:36px;height:1px;background:var(--line)"></i></div>
+    <p class="concept-quote" style="margin-inline:auto">“Whenever we say light, it means
+      movement. Movement at an unbelievable pace. Light makes things visible — not only
+      visually, but otherwise. Making us aware to inquire more. Look around more. Look inside
+      us. Look beyond. With the light coming from inside us.”</p>
+    <p class="concept-src mono">The creative brief — set by the creative lead and design team</p>
+  </div>
+</section>
+
+<!-- ── 04 · VISUAL IDENTITY (exhibit rail) ─────────────────────────────────── -->
+<section class="scene" id="s-identity" data-tag="The identity">
+  <div class="rail-head">
+    <div class="stmt">
+      <div class="k mono"><i></i>The identity</div>
+      <h3>Built by a team<br />of nine — not me.</h3>
+    </div>
+    <p class="stmt" style="max-width:34ch;font-size:14.5px;color:var(--fg-2)">Logo, imagery,
+      the registration site, the awards, the emailers — all designed by the creative lead and
+      the eight-person team working under them. <b>My job was to make sure it all arrived on
+      time and got installed right.</b></p>
+  </div>
+  <div class="rail" id="railIdentity">
+    <div class="rail-track">
+      <figure class="exhibit"><div class="sheet"><img src="assets/fwd/identity.jpg" alt="FWD visual identity — logo and imagery" /></div>
+        <figcaption class="mono"><b>Visual identity</b> — logo, imagery, tone</figcaption></figure>
+      <figure class="exhibit"><div class="sheet"><img src="assets/fwd/identity-taglines.jpg" alt="FWD identity applied across taglines" /></div>
+        <figcaption class="mono"><b>The line, applied</b> — identity across taglines</figcaption></figure>
+      <figure class="exhibit"><div class="sheet"><img src="assets/fwd/website.jpg" alt="FWD registration website" /></div>
+        <figcaption class="mono"><b>Registration site</b> — built for 10,000 sign-ups</figcaption></figure>
+      <figure class="exhibit"><div class="sheet"><img src="assets/fwd/awards.jpg" alt="FWD innovation awards, trophy design" /></div>
+        <figcaption class="mono"><b>Innovation awards</b> — Builder &amp; Catalyst trophies</figcaption></figure>
+      <figure class="exhibit"><div class="sheet"><img src="assets/fwd/digital-branding.jpg" alt="FWD registration-open emailer" /></div>
+        <figcaption class="mono"><b>Emailer</b> — the registration-open send</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 · PERSONALIZATION & COMMS (exhibit rail) ─────────────────────────── -->
+<section class="scene" id="s-touch" data-tag="On the ground">
+  <div class="rail-head">
+    <div class="stmt">
+      <div class="k mono"><i></i>On the ground</div>
+      <h3>Everyone had<br />a name on them.</h3>
+    </div>
+    <p class="stmt" style="max-width:34ch;font-size:14.5px;color:var(--fg-2)">Every badge,
+      standee and screen carried the same system — a name, a speaker number, a topic — so
+      10,000 people could be personally addressed at once. <i>(Name shown here is a placeholder
+      — badges were personalized per attendee.)</i></p>
+    </div>
+  <div class="rail" id="railTouch">
+    <div class="rail-track">
+      <figure class="exhibit"><div class="sheet"><img src="assets/fwd/personalization.jpg" alt="Personalized ID badge and event merchandise" /></div>
+        <figcaption class="mono"><b>ID &amp; goodies</b> — personalized badge, tee, wristband</figcaption></figure>
+      <figure class="exhibit"><div class="sheet"><img src="assets/fwd/branding-comms.jpg" alt="Standee and digital screen branding" /></div>
+        <figcaption class="mono"><b>Standee &amp; d-screen</b> — same system, room scale</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ── 06 · THE ROLE : THE BOARD ────────────────────────────────────────────── -->
+<section class="scene" id="s-role" data-tag="Running the day">
+  <div class="role-grid">
+    <div class="stmt">
+      <div class="k mono"><i></i>What I actually did</div>
+      <h3>The design team<br />built it. I ran it.</h3>
+      <p>Vendor management. Every slide that came up, called from the back of the room.
+        Sound and light coordination. Delegating across eight-plus designers so nothing
+        collided on the day. <b>Less design, more show-calling</b> — the job was making sure
+        ten thousand people never saw a single seam.</p>
+    </div>
+    <div class="board" id="board">
+      <div class="board-row"><span class="go"></span><span class="t">Vendor &amp; venue management</span><span class="tag mono">Pre-event</span></div>
+      <div class="board-row"><span class="go"></span><span class="t">Run-of-show planning</span><span class="tag mono">Pre-event</span></div>
+      <div class="board-row"><span class="go"></span><span class="t">Task delegation — 8+ designers</span><span class="tag mono">Ongoing</span></div>
+      <div class="board-row"><span class="go"></span><span class="t">Stage &amp; AV control, backstage</span><span class="tag mono">Live</span></div>
+      <div class="board-row"><span class="go"></span><span class="t">Slide-by-slide cue calling</span><span class="tag mono">Live</span></div>
+      <div class="board-row"><span class="go"></span><span class="t">Sound &amp; lighting coordination</span><span class="tag mono">Live</span></div>
+      <div class="board-row"><span class="go"></span><span class="t">7 locations kept in sync</span><span class="tag mono">Live</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 07 · THE BUILD : PLAN TO REAL ────────────────────────────────────────── -->
+<section class="scene" id="s-build" data-tag="The build">
+  <div class="stmt centre" style="margin:0 auto clamp(10px,2vh,20px)">
+    <div class="k mono" style="justify-content:center"><i></i>The build</div>
+    <h3>From an empty grid<br />to a room for ten thousand.</h3>
+  </div>
+  <div class="build-pair">
+    <figure class="build-fig" id="buildA">
+      <img src="assets/fwd/stage-plan.jpg" alt="Greybox stage render, before install" />
+      <figcaption class="mono">The plan — greybox stage render</figcaption>
+      <div class="build-wipe" id="buildWipe1"></div>
+    </figure>
+    <figure class="build-fig" id="buildB">
+      <img src="assets/fwd/live-lobby.jpg" alt="The built FWD lobby signage, on the day" />
+      <figcaption class="mono">The room — on the day</figcaption>
+      <div class="build-wipe" id="buildWipe2"></div>
+    </figure>
+  </div>
+</section>
+
+<!-- ── 08 · THE FILM ─────────────────────────────────────────────────────────── -->
+<section class="scene" id="s-film" data-tag="The film">
+  <div class="stmt centre" style="margin:0 auto">
+    <div class="k mono" style="justify-content:center"><i></i>The keynote film</div>
+    <h3>The light, in motion.</h3>
+    <p style="max-width:52ch;margin-inline:auto">Made by the creative team, shot and animated
+      around the same idea as everything else — light as movement, wrapped around the people
+      in the room.</p>
+  </div>
+  <figure class="film-card">
+    <img src="assets/fwd/film-still.jpg" alt="Still from the FWD keynote film" />
+    <div class="film-tag"><b>The Film</b></div>
+  </figure>
+</section>
+
+<!-- ── 09 · THE EYEMASK MOMENT ──────────────────────────────────────────────── -->
+<section class="scene" id="s-mask" data-tag="The moment">
+  <div class="stmt centre" style="margin:0 auto">
+    <div class="k mono" style="justify-content:center"><i></i>The moment</div>
+    <h3>Designed on a slide.<br />Delivered in the room.</h3>
+  </div>
+  <div class="mask-pair">
+    <figure class="mask-fig"><span class="badge mono">Designed</span>
+      <img src="assets/fwd/eyemask-card.jpg" alt="Slide reading: please put on your eye masks and feel the light" />
+      <figcaption class="mono"><b>The cue, on a slide</b> — part of the run-of-show</figcaption></figure>
+    <figure class="mask-fig"><span class="badge mono">Delivered</span>
+      <img src="assets/fwd/live-eyemask.jpg" alt="The same cue, projected live on the day, in the dark auditorium" />
+      <figcaption class="mono"><b>The cue, in the room</b> — called live, on the day</figcaption></figure>
+  </div>
+</section>
+
+<!-- ── 10 · LIVE MOMENT — STARTUPS ON STAGE ─────────────────────────────────── -->
+<section class="scene" id="s-live" data-tag="On stage">
+  <div class="stmt centre" style="margin:0 auto clamp(24px,3.6vh,40px)">
+    <div class="k mono" style="justify-content:center"><i></i>What the room actually saw</div>
+    <h3>A day of showing<br />off what got built.</h3>
+  </div>
+  <figure class="live-fig">
+    <img src="assets/fwd/live-runway.jpg" alt="A robotics demo on the event runway, live" />
+    <figcaption><b>Startup showcase, live on the runway</b>
+      One of the acts sharing the floor that day — alliance partners and the startups they'd
+      backed, presenting alongside the firm's own teams.</figcaption>
+  </figure>
+</section>
+
+<!-- ── 11 · CLOSE ────────────────────────────────────────────────────────────── -->
+<section class="scene c" id="s-end" data-tag="FWD">
+  <div class="end-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <h3 class="end-h" id="endH">Nine people designed it.<br />One room ran on it.</h3>
+    <div class="figs" id="endFigs">
+      <div><div class="n"><em>10K</em></div><div class="l mono">People</div></div>
+      <div><div class="n"><em>7</em></div><div class="l mono">Locations</div></div>
+      <div><div class="n"><em>8+</em></div><div class="l mono">Designers led</div></div>
+      <div><div class="n"><em>1</em></div><div class="l mono">Day</div></div>
+    </div>
+    <a class="end-back" href="index.html" id="endBack" onclick="history.back();return false;"><span class="ar">←</span> All projects</a>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+function wireTopbar(){
+  var t = document.getElementById('topbar'); if (!t) return;
+  var lastY = window.scrollY || 0;
+  addEventListener('scroll', function(){
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    if (y < 90) { t.classList.remove('hide'); lastY = y; return; }
+    if (y > lastY + 4) t.classList.add('hide'); else if (y < lastY - 4) t.classList.remove('hide');
+    lastY = y;
+  }, {passive:true});
+}
+function dragRail(sel){
+  var r = document.getElementById(sel); if (!r) return;
+  var down=false, sx=0, sl=0;
+  r.addEventListener('pointerdown', function(e){
+    down=true; sx=e.clientX; sl=r.scrollLeft; r.classList.add('dragging');
+    r.setPointerCapture(e.pointerId);
+  });
+  r.addEventListener('pointermove', function(e){
+    if(!down) return; r.scrollLeft = sl - (e.clientX - sx);
+  });
+  ['pointerup','pointercancel'].forEach(function(ev){
+    r.addEventListener(ev, function(){ down=false; r.classList.remove('dragging'); });
+  });
+}
+function showEverything(){
+  document.documentElement.classList.remove('js');
+  document.querySelectorAll('.exhibit,.build-fig figcaption,.mask-fig,#board .board-row,'
+    + '.live-fig figcaption').forEach(function(e){
+    e.style.opacity=1; e.style.transform='none';
+  });
+  document.querySelectorAll('.build-wipe').forEach(function(e){ e.style.display='none'; });
+  document.querySelectorAll('#board .board-row').forEach(function(e){ e.classList.add('on'); });
+}
+
+(function boot(){
+  wireTopbar();
+  dragRail('railIdentity');
+  dragRail('railTouch');
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!window.gsap || !window.ScrollTrigger) { showEverything(); return; }
+  window.__fwdBooted = true;
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.Lenis && !reduced) {
+    var lenis = new Lenis({duration:1.05, smoothWheel:true,
+      easing:function(t){ return Math.min(1, 1.001 - Math.pow(2,-10*t)); }});
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t*1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+  if (reduced) { showEverything(); return; }
+
+  try {
+    function onEnter(sel, build){
+      var el = document.querySelector(sel); if (!el) return;
+      ScrollTrigger.create({trigger:el, start:'top 68%', once:true,
+        onEnter:function(){ build(el); }});
+    }
+    function items(root, sel){ return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+
+    /* ---- 01 cover ---------------------------------------------------------- */
+    gsap.set('#s-cover .title .ln>span', {yPercent:110});
+    gsap.set(['#s-cover .title-sub','#s-cover .cr','#s-cover .ev-tag'], {opacity:0, y:26});
+    gsap.timeline({delay:.2})
+      .to('#s-cover .ev-tag', {opacity:1, y:0, duration:.8, ease:'expo.out'})
+      .to('#s-cover .title .ln>span', {yPercent:0, duration:1.25, ease:'expo.out',
+        stagger:.12}, .15)
+      .to('#s-cover .title-sub', {opacity:1, y:0, duration:.9, ease:'expo.out'}, .95)
+      .to('#s-cover .cr', {opacity:1, y:0, duration:.9, ease:'expo.out', stagger:.09}, 1.15);
+
+    /* ---- generic text scenes ------------------------------------------------ */
+    ['#s-scale','#s-concept','#s-build .stmt','#s-film .stmt','#s-mask .stmt',
+     '#s-live .stmt'].forEach(function(sel){
+      var root = document.querySelector(sel); if (!root) return;
+      var bits = root.matches('.stmt') ? items(root, '*') : items(root, '.stmt, .scale-grid > div');
+      gsap.set(bits, {opacity:0, y:34});
+      onEnter(sel, function(){
+        gsap.to(bits, {opacity:1, y:0, duration:1.0, ease:'expo.out', stagger:.1});
+      });
+    });
+
+    /* ---- 04 / 05 exhibit rails ---------------------------------------------- */
+    ['#s-identity','#s-touch'].forEach(function(sel){
+      var root = document.querySelector(sel); if (!root) return;
+      var head = items(root, '.rail-head > *');
+      var cards = items(root, '.exhibit');
+      gsap.set(head, {opacity:0, y:28});
+      gsap.set(cards, {opacity:0, y:50});
+      onEnter(sel, function(){
+        gsap.timeline()
+          .to(head, {opacity:1, y:0, duration:.9, ease:'expo.out', stagger:.1})
+          .to(cards, {opacity:1, y:0, duration:1.0, ease:'back.out(1.15)', stagger:.1}, .3);
+      });
+    });
+
+    /* ---- 06 the role board — lights call themselves on ----------------------- */
+    (function board(){
+      var rows = items(document, '#board .board-row');
+      gsap.set(rows, {opacity:0, x:-16});
+      onEnter('#s-role', function(){
+        var tl = gsap.timeline();
+        tl.to(rows, {opacity:1, x:0, duration:.55, ease:'power2.out', stagger:.14});
+        rows.forEach(function(r, i){
+          tl.call(function(){ r.classList.add('on'); }, null, .35 + i*.14);
+        });
+      });
+    })();
+
+    /* ---- 07 the build : greybox wipes to reveal the real room ---------------- */
+    gsap.set('.build-wipe', {scaleX:1});
+    gsap.set('.build-fig figcaption', {opacity:0, y:14});
+    onEnter('#s-build', function(){
+      gsap.timeline()
+        .to('#buildWipe1', {scaleX:0, duration:1.2, ease:'expo.inOut'})
+        .to('#buildWipe2', {scaleX:0, duration:1.2, ease:'expo.inOut'}, .3)
+        .to('.build-fig figcaption', {opacity:1, y:0, duration:.7, stagger:.15}, .9);
+    });
+
+    /* ---- 08 the film card ----------------------------------------------------- */
+    gsap.set('.film-card', {opacity:0, y:36});
+    onEnter('#s-film', function(){
+      gsap.to('.film-card', {opacity:1, y:0, duration:1.1, ease:'expo.out'});
+    });
+
+    /* ---- 09 designed vs delivered ---------------------------------------------- */
+    gsap.set('.mask-fig', {opacity:0, y:40});
+    onEnter('#s-mask', function(){
+      gsap.to('.mask-fig', {opacity:1, y:0, duration:1.0, ease:'expo.out', stagger:.18});
+    });
+
+    /* ---- 10 live moment --------------------------------------------------------- */
+    gsap.set('.live-fig', {opacity:0, scale:1.04});
+    gsap.set('.live-fig figcaption', {opacity:0, y:16});
+    onEnter('#s-live', function(){
+      gsap.timeline()
+        .to('.live-fig', {opacity:1, scale:1, duration:1.2, ease:'expo.out'})
+        .to('.live-fig figcaption', {opacity:1, y:0, duration:.8}, .5);
+    });
+
+    /* ---- 11 close --------------------------------------------------------------- */
+    gsap.set('#endH, #endFigs > div, #endBack', {opacity:0, y:30});
+    gsap.set('.end-glow', {opacity:0, scale:.7});
+    onEnter('#s-end', function(){
+      gsap.timeline()
+        .to('.end-glow', {opacity:1, scale:1, duration:1.6, ease:'power2.out'})
+        .to('#endH', {opacity:1, y:0, duration:1.0, ease:'expo.out'}, .3)
+        .to('#endFigs > div', {opacity:1, y:0, duration:.8, ease:'expo.out', stagger:.1}, .8)
+        .to('#endBack', {opacity:1, y:0, duration:.8, ease:'expo.out'}, 1.3);
+    });
+
+  } catch (e) { showEverything(); }
+
+  gsap.to('#prog', {scaleX:1, ease:'none',
+    scrollTrigger:{trigger:document.body, start:'top top', end:'bottom bottom', scrub:.3}});
+
+  var here = document.getElementById('hereTag');
+  gsap.utils.toArray('section[data-tag]').forEach(function(sc){
+    ScrollTrigger.create({trigger:sc, start:'top 55%', end:'bottom 55%',
+      onToggle:function(s){ if (s.isActive) here.innerHTML = sc.dataset.tag; }});
+  });
+  ScrollTrigger.create({trigger:'#s-cover', start:'bottom-=90 top',
+    onEnter:function(){ document.getElementById('topbar').classList.add('stuck'); },
+    onLeaveBack:function(){ document.getElementById('topbar').classList.remove('stuck'); }});
+
+  /* safety net — content must never depend on a timed animation running.
+     Long grace period so it can't fire mid-scene and spoil a reveal. */
+  (function watchdog(){
+    var SEL = '.title .ln>span, .title-sub, .cr, .stmt *, .exhibit, .board-row, .n, .l,'
+            + ' .film-card, .mask-fig, .live-fig, .live-fig figcaption, .end-h,'
+            + ' .figs > div, .end-back, .build-fig figcaption, .ev-tag';
+    var GRACE = 7000, seen = new WeakMap();
+    function onScreen(el){ var r = el.getBoundingClientRect();
+      return r.top < innerHeight * 1.1 && r.bottom > -100; }
+    setInterval(function(){
+      var now = Date.now();
+      document.querySelectorAll(SEL).forEach(function(el){
+        if (!onScreen(el)) return;
+        if (!seen.has(el)) { seen.set(el, now); return; }
+        if (now - seen.get(el) < GRACE) return;
+        if (parseFloat(getComputedStyle(el).opacity) < 0.98) {
+          gsap.set(el, {opacity:1, y:0, x:0, yPercent:0, scale:1});
+          if (el.closest && el.closest('#board')) el.classList.add('on');
+        }
+      });
+      document.querySelectorAll('.build-fig').forEach(function(f){
+        if (!onScreen(f)) return;
+        if (!seen.has(f)) { seen.set(f, now); return; }
+        if (now - seen.get(f) < GRACE) return;
+        var w = f.querySelector('.build-wipe');
+        if (w && w.getBoundingClientRect().width > 4) gsap.set(w, {scaleX:0});
+      });
+    }, 1200);
+  })();
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>
